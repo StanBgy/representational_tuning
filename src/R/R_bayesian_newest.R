@@ -13,6 +13,8 @@ library(dplyr)
 # might slightly prefer Ha (von Mises) compared to prior 13 which slightly prefers H0 (uniform)
 # The authors choose prior 12 in their example (with n = 15 and low expected 
 # concentration), so I did that too here
+
+# Thanks Evi Hendrikx for that code (and preventing from spending time looking at a R file)
 mu0 = NA
 R0 = 0
 c0 = 1
