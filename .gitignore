@@ -3,6 +3,7 @@
 *.zip 
 *.json
 
+.ipynb_checkpoints/
 data/
 projects/
 build/
