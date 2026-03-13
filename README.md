@@ -3,10 +3,7 @@
 
 This is the repository for the code of the Representational Tuning Paper, available here [add link when available]
 
-
-Full scripts to install the dependencies and setup of the file systems will be provided soon. 
-
-
+If there is any difficulties running this code, please feel free to reach out to me at s.r.bergey@tilburguniversity.edu 
 
 ## Dependencies and installation.
 
@@ -104,8 +101,9 @@ Due to the size of the data, we did not store in the output on FigShare. If you 
 
 ## Notebooks 
 
-The repository contains many notebooks that we used to run some analysis, sometimes before doing the voxel fitting (e.g.: the `flips.ipynb` was used to find which MDS to rotate to). The most important notebooks are `export_to_corticalsurface.ipynb`, as mentioned above, and `compute_correlations.ipynb`, which deals with the correlation between cortical surface and MDS distances. This require the distances on the cortical surface (`meshes_and_distances.m`) and on the MDS (`distances_mds.py`) to be computed. The `matlab.ipynb` exports the data from fitted models to csv, to then be used in matlab for our statistical analyses. The `new_angle.ipynb` is used to find the new optimal rotation angle for each ROI for their `x0` and `y0` fitted positions. 
-### matlab
+The repository contains many notebooks that we used to run some analysis, sometimes before doing the voxel fitting (e.g.: the `flips.ipynb` was used to find which MDS to rotate to). The most important notebooks are `export_to_corticalsurface.ipynb`, as mentioned above, and `compute_correlations.ipynb`, which deals with the correlation between cortical surface and MDS distances. This require the distances on the cortical surface (`meshes_and_distances.m`) and on the MDS (`distances_mds.py`) to be computed. The `matlab.ipynb` exports the data from fitted models to csv, to then be used in matlab for our statistical analyses. The `new_angle.ipynb` is used to find the new optimal rotation angle for each ROI for their `x0` and `y0` fitted positions.
+
+## matlab
 
 The matlab code can be found in the matlab repository. I decided to separate them due to the large amount of dependencies required to run the matlab code. The `matlab` folder in this repo contains the data used then in th matlab analysis script, to run our ANOVA tests and create the graphs used in the manuscript. It is mainly used to make the projections on the cortical surface ( `drawrois.m`), calculating the distances between voxels on the cortical surface (`meshes_and_distances.m`) and do the ANOVA tests (` analysis.m`)
 
