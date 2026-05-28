@@ -22,7 +22,7 @@ conj_prior = c(mu0, R0, c0)
 
 
 library(readr)
-data <- read_csv("angle_roi_unfinished.csv")
+data <- read_csv("angle_roi_best_roi.csv")
 
 rownames(data) <- data[[1]]
 data <- data[ , -1]
