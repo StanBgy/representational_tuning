@@ -180,6 +180,8 @@ There, the important files are:
 - `meshes_and_distances.m` – Cortical surface distances, needed to compute the correlations
 - `analysis.m` – ANOVA and other statistical tests, and figure creation
 
+The code is available here: https://github.com/StanBgy/RTM_matlab
+
 ## R Analysis
 
 The Bayesian isotropy test on preferred angles is implemented in `src/R/R_bayesian_newest.R`.
@@ -285,6 +287,9 @@ from nsd_access import NSDAccess
 nsd = NSDAccess('/path/to/nsddata')
 nsd.download_coco_annotation_file()
 ```
+
+### Other data 
+The masks needed to run the anaylsis, the condition data and most of the output data can be found on figshare: https://doi.org/10.6084/m9.figshare.32125993
 
 ### Expected runtime for full reproduction
 
