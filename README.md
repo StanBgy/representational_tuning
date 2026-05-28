@@ -103,7 +103,6 @@ A quick demo using Subject 1 only is built into `main.py` to verify the pipeline
 ### What the demo does
 
 - Runs the complete pipeline on Subject 1 data only
-- Processes only the first ROI (saves time)
 - Generates all expected outputs in the `projects/` folder
 
 ### Instructions to run demo
@@ -114,32 +113,10 @@ Simply run the main script with the demo flag:
 python src/main.py --demo True
 ```
 
-### Expected output
-
-The demo will generate the following files for Subject 1:
-
-| Output file | Description |
-|-------------|-------------|
-| `projects/betas/subj01_betas.npy` | Loaded beta weights |
-| `projects/rdm/subj01_rdm.npy` | Representational dissimilarity matrix |
-| `projects/mds/subj01_mds.pkl` | MDS coordinates |
-| `projects/fits/subj01_gaussian_fits.pkl` | Gaussian model fit parameters |
-| `projects/results/subj01_correlations.csv` | Correlation results |
-
-Console output example:
-
-```
-Running demo mode: Subject 1 only
-Loading betas for subj01... Done (2.3s)
-Creating RDM for subj01... Done (1.8s)
-Fitting Gaussians for subj01... 100%|████████████| 100/100
-Noise ceiling computed: mean = 0.72
-Demo complete! Outputs saved to projects/
-```
 
 ### Expected run time for demo
 
-~2–3 minutes on a standard desktop computer (16GB RAM, standard SSD)
+~About half a day on a standard desktop computer (16GB RAM, standard SSD, fast CPU)
 
 > **Note:** The demo uses real NSD data. If you haven't downloaded the NSD dataset yet, the demo will fail. See [Reproduction Instructions](#reproduction-instructions) for data access.
 
@@ -158,7 +135,7 @@ python src/main.py
 This sequentially executes:
 
 1. `load_betas.py` – Load NSD beta weights
-2. `create_rdm.py` – Create RDMs and MDS embeddings
+2. `create_rdm.py` – Create RDMs and MDS representationl spaces
 3. `noise_ceiling.py` – Compute noise ceiling per voxel
 4. `apply_rotation.py` – Rotate MDSs for alignment
 5. `fit_params_inverse.py` – Fit Gaussian tuning parameters
@@ -195,11 +172,13 @@ python src/main_full.py
 
 ### MATLAB code
 
-The MATLAB code for ANOVA tests and cortical projections is maintained separately due to dependencies. The `matlab/` folder in this repo contains the exported data needed to run:
+The MATLAB code for ANOVA tests and cortical projections is maintained separately due to dependencies. The `matlab/` folder contains the outputs of the `matlab.ipynb` notebook, not the code itself. The code can be found at the follow repository: 
+
+There, the important files are: 
 
 - `drawrois.m` – Projections on cortical surface
-- `meshes_and_distances.m` – Cortical surface distances
-- `analysis.m` – ANOVA statistical tests
+- `meshes_and_distances.m` – Cortical surface distances, needed to compute the correlations
+- `analysis.m` – ANOVA and other statistical tests, and figure creation
 
 ---
 
@@ -252,7 +231,7 @@ representational-tuning/
 The Natural Scenes Dataset is available from the authors' AWS server:
 [https://natural-scenes-dataset.s3.amazonaws.com/index.html](https://natural-scenes-dataset.s3.amazonaws.com/index.html)
 
-We used nativesurface betas → denoised betas (`betas_fithrf_GLMdenoise_RR`). An AWS account is recommended for command-line download.
+We used nativesurface betas → denoised betas (`betas_fithrf_GLMdenoise_RR`). An AWS account is recommended for command-line download. Then, the `get_betas` function for the nsd library will extract the betas, done in `load_betas.py`
 
 Image annotations can be downloaded via the NSD access library:
 
@@ -276,7 +255,7 @@ nsd.download_coco_annotation_file()
 
 1. Run `src/main.py` to generate all fitted models
 2. Run `export_to_corticalsurface.ipynb` to export to cortical surface
-3. Run MATLAB `analysis.m` for statistical tests and figure generation
+3. Run MATLAB `analysis.m` for statistical tests and figure generation. Some extra information were added to the figures in Adobe Illustrator based on the outputs of the statistical test.
 
 ---
 
@@ -292,4 +271,4 @@ Copyright (c) 2025 Stan Bergey
 
 If you use this code in your research, please cite:
 
-> Bergey, S.R. et al. (2025). Representational Tuning. *Nature Neuroscience*. [DOI coming soon]
+> Coming Soon [DOI coming soon]
