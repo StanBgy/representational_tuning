@@ -1,3 +1,4 @@
+import argparse
 from load_betas import load_betas
 from noise_ceilling import compute_noise_ceilling
 from create_rdm import create_rdm
@@ -9,12 +10,18 @@ from distances_mds import compute_distance
 from utils.utils import *
 
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--demo', action='store_true')
+args = parser.parse_args()
+
 mode = "train"
 rotated=True
 full_brain = False 
 distances = False  # Change to false if you dont care about the distance/correlation part of the analysis
+if args.demo:
+    subj_list = subj_list[:1]
 
-
+print(subj_list)
 if __name__ == "__main__":
     # First step : get the betas
     

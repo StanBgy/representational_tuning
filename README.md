@@ -180,6 +180,51 @@ There, the important files are:
 - `meshes_and_distances.m` – Cortical surface distances, needed to compute the correlations
 - `analysis.m` – ANOVA and other statistical tests, and figure creation
 
+## R Analysis
+
+The Bayesian isotropy test on preferred angles is implemented in `src/R/R_bayesian_newest.R`.
+It computes Bayes Factors (BF) in favor of a von Mises distribution (non-uniform preferred angles)
+over a uniform distribution, using a conjugate prior via the `BayesCircIsotropy` package.
+
+### Dependencies
+
+Install the required R packages once:
+
+```r
+install.packages(c('R.matlab', 'REdaS', 'tidyr', 'dplyr', 'readr'))
+
+# In case BayesCircIsotropy is not on CRAN — install from GitHub:
+# install.packages('remotes')
+remotes::install_github("keesmulder/BayesCircIsotropy")
+```
+
+### Input
+
+The script reads `angle_roi_unfinished.csv` from the working directory. This file is generated
+by the main Python pipeline (`src/main.py`). Make sure to run that first.
+
+### Running the script
+
+Open `src/R/R_bayesian_newest.R` in RStudio or run from the terminal:
+
+```bash
+Rscript src/R/R_bayesian_newest.R
+```
+
+> **Note:** Run this from the `src/R/` directory, or update the `read_csv` path at the top of
+> the script to point to the correct location of `angle_roi_unfinished.csv`.
+
+### Output
+
+Results are saved to `BF_angluar_test_preferedxy.csv` with columns:
+
+| Column | Description |
+|--------|-------------|
+| `rois` | ROI name |
+| `pH0`  | Posterior probability of uniform distribution |
+| `pHa`  | Posterior probability of von Mises distribution |
+| `BF`   | Bayes Factor in favor of von Mises (Ha) |
+
 ---
 
 ## File Organization
@@ -210,7 +255,8 @@ representational-tuning/
 ├── data/
 │   ├── conditions/          # Train/test split CSVs
 │   ├── mask/                # ROI masks
-│   └── nsddata/             # NSD dataset (external)
+│   └── nsddata/             # NSD data for cortical projections (surface data and cortical projection outputs) 
+│   └── NSD/                 # NSD dataset (external, should contains the betas (nsdadata-betas) and the conditions (ppdata, the responses.tsv files for each subject)
 └── projects/
     ├── betas/
     ├── distances/
@@ -231,7 +277,7 @@ representational-tuning/
 The Natural Scenes Dataset is available from the authors' AWS server:
 [https://natural-scenes-dataset.s3.amazonaws.com/index.html](https://natural-scenes-dataset.s3.amazonaws.com/index.html)
 
-We used nativesurface betas → denoised betas (`betas_fithrf_GLMdenoise_RR`). An AWS account is recommended for command-line download. Then, the `get_betas` function for the nsd library will extract the betas, done in `load_betas.py`
+We used nativesurface betas → denoised betas (`betas_fithrf_GLMdenoise_RR`). An AWS account is recommended for command-line download. Then, the `get_betas` function for the nsd library will extract the betas, done in `load_betas.py`. The data itself, and the annotations, should be placed in `data/NSD/nsddata`.
 
 Image annotations can be downloaded via the NSD access library:
 
