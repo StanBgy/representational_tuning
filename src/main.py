@@ -1,5 +1,6 @@
 import argparse
 from load_betas import load_betas
+from clean_betas import clean_betas
 from noise_ceilling import compute_noise_ceilling
 from create_rdm import create_rdm
 from apply_rotation import apply_rotation
@@ -27,6 +28,9 @@ if __name__ == "__main__":
     
     # we want the not full betas either way for RDM + MDS creation
     load_betas(subj_list, sessions, targetspace=targetspace, mode=mode)
+    
+    if 'subj06' in subj_list or 'subj08' in subj_list:
+        clean_betas(subj_list, mode)
 
     print("----- Betas done -----")
 
@@ -40,7 +44,8 @@ if __name__ == "__main__":
 
     # Apply Rotation 
     if rotated:
-        apply_rotation('VO-1', subj_list, rois, mode=mode)
+        for sub in subj_list:
+            apply_rotation('VO-1', sub, rois, mode=mode)
 
     print('-----Rotation done-------')
 

@@ -60,7 +60,7 @@ def gaussian_fit(subj_list, rois, params, rotated=False, mode='averaged'):
 
         print(f'Starting fitting for subj0{i + 1}')
         n_betas, n_voxels = betas.shape
-        for roi in rois.keys():
+        for roi in ["V1"]:
             start = time.time()
             if not rotated:
                 mds_file = os.path.join(mds_dir, subj, f'{subj}_{roi}_mds_{mode}.npy')
@@ -133,7 +133,7 @@ def gaussian_fit(subj_list, rois, params, rotated=False, mode='averaged'):
                 roi_rot_test = sum((betas_test - np.tile(betas_test.mean(axis=0), (sum(train_test_mask), 1)))**2).T
                 fits_roi["test_var_explained"] = 1 - roi_res_test / roi_rot_test
             fits_roi["var_explained"] = 1 - roi_res / roi_tot
-            fits_roi["mds_ecc"] = (fits_roi.x0 ** 2 + fits_roi.y0[1] ** 2) ** (1/2)
+            fits_roi["mds_ecc"] = (fits_roi.x0 ** 2 + fits_roi.y0 ** 2) ** (1/2)  # This looks wrong, but not used
             fits_roi["mds_ang"] = np.arctan2(fits_roi.x0/bounds[1][0], fits_roi.y0/bounds[1][1])
 
             np.save(fit_file, fits_roi)

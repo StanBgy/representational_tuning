@@ -1,5 +1,5 @@
 from load_betas_full import load_betas_full
-from clean_betas import clean_betas
+from clean_betas_full import clean_betas_full
 from fit_params_fullbrain import gaussian_fit_full
 from variance_full_brain import variance_full_brain
 
@@ -24,7 +24,7 @@ if __name__ == "__main_full__":
     load_betas_full(subj_list, sessions)
 
     # clean them; necessary due to missing values 
-    clean_betas(subj_list)
+    clean_betas_full(subj_list)
 
     # Do the fitting. TAKES AGES
     gaussian_fit_full(subj_list, rois, params, mode=mode, n_jobs=6)

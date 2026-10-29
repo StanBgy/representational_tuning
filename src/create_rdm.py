@@ -155,7 +155,7 @@ def create_rdm(list_subj, mode='averaged'):
             maskdata_rh_path = os.path.join(mask_dir, sub , f'rh.{sub}.testrois.mgz')
             maskdata_rh = nib.load(maskdata_rh_path).get_fdata().squeeze()
 
-            maskdata_lh[maskdata_lh > (max(rois_long.values()))] = 0  # Remove ROIs above TO-2. Apparently this is necessary to not break??? 
+            maskdata_lh[maskdata_lh > (max(rois_long.values()))] = 0  # Remove ROIs above TO-2. 
             maskdata_rh[maskdata_rh > (max(rois_long.values()))] = 0
 
             maskdata_lh_short_path = os.path.join(mask_dir, sub, f'lh.short.{sub}.testrois.npy')

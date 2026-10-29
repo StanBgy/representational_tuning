@@ -1,12 +1,15 @@
 import os
 import nsd_access 
 import numpy as np 
-from utils.utils import betas_dir, nsd_dir, proj_dir, mask_dir, sessions, subj_list, data_dir
+from utils.utils import betas_dir, nsd_dir, proj_dir, mask_dir, sessions, subj_list, data_dir, sessions
 from utils.split_condition import split_conditions
 from nsddatapaper_rsa.utils.nsd_get_data import get_conditions, get_betas 
 from nsddatapaper_rsa.utils.utils import average_over_conditions
 from nsd_access import NSDAccess
 import nibabel as nib
+
+
+ 
 
 
 """
@@ -37,7 +40,6 @@ def load_betas(subs, sessions, targetspace, mode='averaged'):
         maskdata_file = os.path.join(mask_dir, sub, f'{sub}.testrois.npy')
         maskdata_long = np.load(maskdata_file,allow_pickle=True)
         maskdata_long_bool = (maskdata_long > 0)
-        maskdata_long_bool
         conditions = get_conditions(nsd_dir, sub, sessions[i])
 
         conditions = np.asarray(conditions).ravel()
@@ -124,3 +126,5 @@ def load_betas(subs, sessions, targetspace, mode='averaged'):
             else:
                 print(f'\t\tfiles exist for {sub}')
 
+subj_list = ['subj06', 'subj08']
+load_betas(subj_list, sessions, targetspace, 'train')

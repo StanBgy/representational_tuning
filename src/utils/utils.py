@@ -1,16 +1,16 @@
 import os
 import numpy as np
-
+from pathlib import Path
 
 """
 Some needed variables for all scripts
 """
 
 targetspace = 'nativesurface'
-
+base_dir = Path(__file__).parent.parent.parent
 # this is kinda annoying
 #base_dir  = '/media/Working/stan-thesis/'
-base_dir = '/home/stan/thesis-repo/'
+#base_dir = '/Users/stan/RTM_paper/'
 
 
 data_dir = os.path.join(base_dir, 'data')
@@ -79,6 +79,14 @@ params = {'random': True,
            'loss': 'linear',
            'method': 'trf'
         }
+
+new_params = {'random': True, 
+          'initial': (np.array([0, -0.4, 0.01, 0.1, - 2]), np.array([1, 0.4, 2, 10, 2])), 
+           'bounds': (np.array([0, -np.pi, 0.01, 1e-08, - np.inf]),np.array([1.05, np.pi, np.inf, np.inf, np.inf])),
+           'loss': 'linear',
+           'method': 'trf'
+        }
+
 
 models = [ 'oself', 'best_roi']
 hemis = ['lh', 'rh']

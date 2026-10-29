@@ -107,7 +107,7 @@ def gaussian_fit_full(subj_list, rois, params,  mode='averaged', save=False, n_j
                         roi_rot_test = sum((betas_test - np.tile(betas_test.mean(axis=0), (sum(train_test_mask), 1)))**2).T
                         fits_roi["test_var_explained"] = 1 - roi_res_test / roi_rot_test
                     fits_roi["var_explained"] = 1 - roi_res / roi_tot
-                    fits_roi["mds_ecc"] = (fits_roi.x0 ** 2 + fits_roi.y0[1] ** 2) ** (1/2)
+                    fits_roi["mds_ecc"] = (fits_roi.x0 ** 2 + fits_roi.y0 ** 2) ** (1/2)
                     fits_roi["mds_ang"] = np.arctan2(fits_roi.x0/bounds[1][0], fits_roi.y0/bounds[1][1])
         
                     np.save(fit_file, fits_roi)
